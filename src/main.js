@@ -3,8 +3,32 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
+import api from './utils/index'
 
-Vue.config.productionTip = false;
+// 引入jquery
+import $ from 'jquery'
+
+// 样式引入
+import 'normalize.css'
+import '@/assets/css/comment.css'
+
+// 引入bootstrap
+import '@/assets/bootstrap/js/bootstrap.min.js'
+import '@/assets/bootstrap/css/bootstrap.css'
+
+
+// 将工具方法挂载到Vue上
+Vue.use(api)
+
+Vue.config.productionTip = false
+
+// 自定义指令
+Vue.directive('highlight',function (el) {
+    let blocks = el.querySelectorAll('pre code');
+    blocks.forEach((block)=>{
+        hljs.highlightBlock(block)
+    })
+})
 
 new Vue({
   router,

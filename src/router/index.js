@@ -1,30 +1,68 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
+import Vue from 'vue'
+import Router from 'vue-router'
+import localStorage from '@/utils/localStorage'
+import {loginUser} from '@/config/localStorage.config'
+import Home from './home'
+import Admin from './admin'
 
-Vue.use(VueRouter);
+
+Vue.use(Router)
 
 const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  }
-];
+    {
+        path: '/',
+        redirect: '/home'
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: () => import('@/views/register')
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: () => import('@/views/login')
+    },
+    Home,
+    Admin,
+    {
+        path: '/chat',
+        name: 'chat',
+        component: () => import('@/views/chat'),
+        meta: {
+            auth: true,
+            title: 'chat'
+        }
+    },
+    {
+        path: '/*',
+        redirect: '/home'
+    }
+]
 
-const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
-  routes
-});
+const router = new Router({
+    routes: routes
+})
 
-export default router;
+// 全局路由守卫
+// 路由变化之前
+// router.beforeEach((to, form, next) => {
+//   const username = localStorage.get(loginUser)
+//   // 登陆后直接首页
+//   if (to.path === '/login') {
+//     if (username) {
+//       router.push('/home')
+//     }
+//   }
+//   next()
+// })
+// // 路由变化之后
+// router.afterEach((to) => {
+//   const username = localStorage.get(loginUser)
+//   // 未登录跳转登录页
+//   if (!username && to.path !== '/login') {
+//     //router.push('/login')
+//   }
+// })
+
+export default router

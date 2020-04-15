@@ -1,5 +1,6 @@
 'use strict'
 const path = require('path')
+const webpack = require('webpack')
 
 function resolve(dir) {
     return path.join(__dirname, dir)
@@ -45,11 +46,20 @@ module.exports = {
         name: name,
         resolve: {
             alias: {
+                'vue$': 'vue/dist/vue.esm.js',
                 '@': resolve('src')
             }
-        }
+        },
+        plugins: [
+            new webpack.ProvidePlugin({
+                $:"jquery",
+
+                jQuery:"jquery",
+                "windows.jQuery":"jquery"
+            })
+        ]
     },
-    chainWebpack(config) {
+    /*chainWebpack(config) {
         config.plugins.delete('preload')
         config.plugins.delete('prefetch')
 
@@ -125,5 +135,5 @@ module.exports = {
                     config.optimization.runtimeChunk('single')
                 }
             )
-    }
+    }*/
 }
