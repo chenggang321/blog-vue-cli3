@@ -6,7 +6,12 @@ import Home from './home'
 import Admin from './admin'
 
 
-Vue.use(Router)
+Vue.use(Router);
+
+const VueRouterPush = Router.prototype.push
+Router.prototype.push = function push (to) {
+    return VueRouterPush.call(this, to).catch(err => err)
+}
 
 const routes = [
     {
