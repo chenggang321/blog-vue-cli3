@@ -5,32 +5,32 @@ import des from './DES'
 import utils from './utils'
 
 // 将公用方法挂载到Vue的原型上
-const install = Vue =>{
-  if(install.installed) return
-  install.installed = true;
-  Object.defineProperties(Vue.prototype,{
-    $api:{
-      get(){
+const install = (Vue) => {
+  if (install.installed) return
+  install.installed = true
+  Object.defineProperties(Vue.prototype, {
+    $api: {
+      get() {
         return apiList
       }
     },
-    $local:{
-      get(){
+    $local: {
+      get() {
         return localStorage
       }
     },
-    $toast:{
-      get(){
+    $toast: {
+      get() {
         return toast
       }
     },
-    $des:{
-      get(){
+    $des: {
+      get() {
         return des
       }
     },
-    $utils:{
-      get(){
+    $utils: {
+      get() {
         return utils
       }
     }

@@ -19,91 +19,93 @@
       </thead>
 
       <tbody v-if="articleList">
-        <tr v-for="(article,index) in articleList">
-          <td>{{index}}</td>
-          <td>{{article.title}}</td>
-          <td>{{article.author}}</td>
-          <td>{{article.desc}}</td>
-          <td>{{article.create_time}}</td>
-          <td>{{article.update_time}}</td>
+        <tr v-for="(article, index) in articleList" :key="index">
+          <td>{{ index }}</td>
+          <td>{{ article.title }}</td>
+          <td>{{ article.author }}</td>
+          <td>{{ article.desc }}</td>
+          <td>{{ article.create_time }}</td>
+          <td>{{ article.update_time }}</td>
           <td>
             <a @click="editArticle(article._id)">修改</a>|
-            <a @click="deleteArticle(article._id,index)">删除</a>
+            <a @click="deleteArticle(article._id, index)">删除</a>
           </td>
         </tr>
       </tbody>
       <tbody v-else>
-      <tr>
-        <td colspan="3">暂时没有分类</td>
-      </tr>
+        <tr>
+          <td colspan="3">暂时没有分类</td>
+        </tr>
       </tbody>
     </table>
-    <page class="pull-right page"
-          :total="total"
-          :current-page='current'
-          :display="display"
-          @pagechange="pageChange"></page>
+    <page
+      class="pull-right page"
+      :total="total"
+      :current-page="current"
+      :display="display"
+      @pagechange="pageChange"
+    />
   </div>
 </template>
 
 <script>
-  import toast from "@/components/toast/toast"
-  import Page from '@/components/page/page'
+import toast from '@/components/toast/toast'
+import Page from '@/components/page/page'
 
-  export default {
-    name: "article-list",
-    data() {
-      return {
-        articleList: null,
-        total: 0,     // 记录总条数
-        display: 10,   // 每页显示条数
-        current: 1,   // 当前的页数
+export default {
+  name: 'ArticleList',
+  components: {
+    Page
+  },
+  data() {
+    return {
+      articleList: null,
+      total: 0, // 记录总条数
+      display: 10, // 每页显示条数
+      current: 1 // 当前的页数
+    }
+  },
+  created() {
+    this.getArticleList()
+  },
+  methods: {
+    deleteArticle(id, index) {
+      if (index > -1) {
+        this.articleList.splice(index, 1)
       }
-    },
-    created() {
-      this.getArticleList()
-    },
-    methods: {
-      deleteArticle(id, index) {
-        if (index > -1) {
-          this.articleList.splice(index, 1)
-        }
-        this.$api.deleteArticle({id}).then(res => {
-          const data = res.data
-          toast({
-            position: 'top',
-            message: data.message
-          })
+      this.$api.deleteArticle({ id }).then((res) => {
+        const data = res.data
+        toast({
+          position: 'top',
+          message: data.message
         })
-      },
-      editArticle(id){
-        this.$router.push(`/admin/articleEdit/${id}`)
-      },
-      pageChange(current) {
-        this.getArticleList(current)
-      },
-      getArticleList(currentPage){
-        this.$api.getArticleList(
-          {
-            pageSize: this.display,
-            pageNum: currentPage
-          }
-        ).then(res => {
+      })
+    },
+    editArticle(id) {
+      this.$router.push(`/admin/articleEdit/${id}`)
+    },
+    pageChange(current) {
+      this.getArticleList(current)
+    },
+    getArticleList(currentPage) {
+      this.$api
+        .getArticleList({
+          pageSize: this.display,
+          pageNum: currentPage
+        })
+        .then((res) => {
           const data = res.data
           this.total = data.data.count
           this.current = data.data.pageNum
           this.articleList = data.data.list
         })
-      }
-    },
-    components: {
-      Page
     }
   }
+}
 </script>
 
 <style scoped>
-  .page {
-    margin-right: 20px;
-  }
+.page {
+  margin-right: 20px;
+}
 </style>

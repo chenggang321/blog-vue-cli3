@@ -1,25 +1,23 @@
 <template>
   <div>
-    <AdminHeader></AdminHeader>
+    <AdminHeader />
     <div class="container-fluid">
       <div class="row">
-        <RouterView/>
+        <RouterView />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  import AdminHeader from '@/views/common/layout/adminHeader'
+import AdminHeader from '@/views/common/layout/adminHeader'
 
-  export default {
-    name: "index",
-    components: {
-      AdminHeader
-    }
+export default {
+  name: 'Index',
+  components: {
+    AdminHeader
   }
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

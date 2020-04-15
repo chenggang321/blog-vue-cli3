@@ -3,37 +3,71 @@
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <button
+          type="button"
+          class="navbar-toggle collapsed"
+          data-toggle="collapse"
+          data-target="#bs-example-navbar-collapse-1"
+          aria-expanded="false"
+        >
           <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+          <span class="icon-bar" />
+          <span class="icon-bar" />
+          <span class="icon-bar" />
         </button>
-        <a class="navbar-brand" href="/"><span><img class="logo" src="@/assets/images/favicon.png" style="margin-top: -5px;"/>&nbsp;</span></a>
+        <a
+          class="navbar-brand"
+          href="/"
+        ><span><img
+          class="logo"
+          src="@/assets/images/favicon.png"
+          style="margin-top: -5px;"
+        >&nbsp;</span></a>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
         <form class="navbar-form navbar-left">
           <div class="form-group">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="搜索文章" id="keyWord" name="keyword">
+              <input
+                id="keyWord"
+                type="text"
+                class="form-control"
+                placeholder="搜索文章"
+                name="keyword"
+              >
               <span class="input-group-btn">
-							<button class="btn btn-default" type="button" id="searchBtn"><span
-                class="glyphicon glyphicon-search"></span></button>
-						  </span>
+                <button id="searchBtn" class="btn btn-default" type="button">
+                  <span class="glyphicon glyphicon-search" />
+                </button>
+              </span>
             </div>
           </div>
         </form>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="https://github.com/chenggang321"><span></span>github</a></li>
           <li>
-            <a data-toggle="modal" data-target="#loginModal" style="cursor:pointer;" v-if="!userInfo">登录</a>
-            <ul class="nav navbar-nav navbar-right" v-else>
-              <li class="dropdown" v-model="userInfo">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                   aria-expanded="false">{{userInfo.username}} <span class="caret"></span></a>
+            <a href="https://github.com/chenggang321"><span />github</a>
+          </li>
+          <li>
+            <a
+              v-if="!userInfo"
+              data-toggle="modal"
+              data-target="#loginModal"
+              style="cursor: pointer;"
+            >登录</a>
+            <ul v-else class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a
+                  href="#"
+                  class="dropdown-toggle"
+                  data-toggle="dropdown"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >{{ userInfo.username }} <span
+                  class="caret"
+                /></a>
                 <ul class="dropdown-menu">
                   <li v-if="userInfo.type === 0">
                     <router-link to="/admin">进入后台</router-link>
@@ -44,7 +78,7 @@
             </ul>
             <modal id="loginModal" title="登录/注册">
               <div slot="modal-body">
-                <login></login>
+                <login />
               </div>
               <!--<div slot="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -52,41 +86,43 @@
             </modal>
           </li>
         </ul>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
   </nav>
 </template>
 
 <script>
-  import Modal from '@/components/modal/blog-modal'
-  import Login from '@/views/login'
-  import {mapGetters, mapMutations} from 'vuex'
+import Modal from '@/components/modal/blog-modal'
+import Login from '@/views/login'
+import { mapGetters, mapMutations } from 'vuex'
 
-  export default {
-    name: "blogHeader",
-    computed: {
-      userInfo() {
-        return this.user === undefined ? null : JSON.parse(this.user)
-      },
-      ...mapGetters({
-        user: "user"
-      })
+export default {
+  name: 'BlogHeader',
+  components: {
+    Modal,
+    Login
+  },
+  computed: {
+    userInfo() {
+      return this.user === undefined ? null : JSON.parse(this.user)
     },
-    methods: {
-      ...mapMutations({
-        removeUser: 'REMOVE_USER'
-      })
-    },
-    components: {
-      Modal,
-      Login
-    }
+    ...mapGetters({
+      user: 'user'
+    })
+  },
+  methods: {
+    ...mapMutations({
+      removeUser: 'REMOVE_USER'
+    })
   }
+}
 </script>
 
 <style scoped>
-  .logo{
-    width:32px;
-    height:32px;
-  }
+.logo {
+  width: 32px;
+  height: 32px;
+}
 </style>

@@ -5,37 +5,37 @@ export default {
     return str ? CryptoJS.MD5(str).toString() : ''
   },
   // 登录加密
-  enCryption(data){
+  enCryption(data) {
     // 两次MD5加密
     return this.MD5(this.MD5(data))
   },
 
   // 加密
-  enDes(data){
-    let key = 'KEY1';
-    let iv = 'KEY2';
-    key = CryptoJS.enc.Utf8.parse(key);
-    iv = CryptoJS.enc.Utf8.parse(iv);
-    let encrypted = CryptoJS.DES.encrypt(data, key, {
+  enDes(data) {
+    let key = 'KEY1'
+    let iv = 'KEY2'
+    key = CryptoJS.enc.Utf8.parse(key)
+    iv = CryptoJS.enc.Utf8.parse(iv)
+    const encrypted = CryptoJS.DES.encrypt(data, key, {
       iv: iv,
       mode: CryptoJS.mode.CBC,
       padding: CryptoJS.pad.Pkcs7
-    });
-    return encrypted.toString();
+    })
+    return encrypted.toString()
   },
 
-  //解密
+  // 解密
   deDES(data) {
-    let key = 'KEY1'; //密钥
-    let iv = 'KEY2';
+    let key = 'KEY1' // 密钥
+    let iv = 'KEY2'
 
-    key = CryptoJS.enc.Utf8.parse(key);
-    iv = CryptoJS.enc.Utf8.parse(iv);
-    let decrypted = CryptoJS.DES.decrypt(data, key, {
+    key = CryptoJS.enc.Utf8.parse(key)
+    iv = CryptoJS.enc.Utf8.parse(iv)
+    const decrypted = CryptoJS.DES.decrypt(data, key, {
       iv: iv,
       mode: CryptoJS.mode.CBC,
       padding: CryptoJS.pad.Pkcs7
-    });
-    return decrypted.toString(CryptoJS.enc.Utf8); //
+    })
+    return decrypted.toString(CryptoJS.enc.Utf8) //
   }
 }

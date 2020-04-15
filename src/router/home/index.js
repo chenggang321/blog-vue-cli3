@@ -14,13 +14,13 @@ export default {
       }
     },
     {
-      path:'articleDetail/:id',
-      name:'articleDetail',
-      component:() => import('@/views/home/detail'),
+      path: 'articleDetail/:id',
+      name: 'articleDetail',
+      component: () => import('@/views/home/detail'),
       meta: {
         auth: true,
         title: '详情'
       }
-    },
+    }
   ]
 }

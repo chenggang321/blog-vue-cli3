@@ -1,4 +1,4 @@
-export default   {
+export default {
   path: '/admin',
   name: 'admin',
   component: () => import('@/views/common/layout/adminLayout'),
@@ -79,7 +79,7 @@ export default   {
     {
       path: 'htmlToMd',
       name: 'htmlToMd',
-      component: ()=> import('@/views/admin/tools/htmlToMd'),
+      component: () => import('@/views/admin/tools/htmlToMd'),
       meta: {
         auth: true,
         title: '工具'

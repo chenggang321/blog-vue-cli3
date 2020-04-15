@@ -1,13 +1,11 @@
 <template>
-    <h1>欢迎进入后台</h1>
+  <h1>欢迎进入后台</h1>
 </template>
 
 <script>
-    export default {
-        name: "admin-home"
-    }
+export default {
+  name: 'AdminHome'
+}
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

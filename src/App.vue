@@ -1,27 +1,23 @@
 <template>
   <div id="app">
-    <loading v-if="loading"></loading>
-    <router-view></router-view>
+    <loading v-if="loading" />
+    <router-view />
   </div>
 </template>
 
 <script>
-    import Loading from '@/components/loading/loading'
-    import {mapGetters} from 'vuex'
+import Loading from '@/components/loading/loading'
+import { mapGetters } from 'vuex'
 
-    export default {
-        name: 'App',
-        computed: {
-            ...mapGetters([
-                'loading'
-            ])
-        },
-        components: {
-            Loading
-        }
-    }
+export default {
+  name: 'App',
+  components: {
+    Loading
+  },
+  computed: {
+    ...mapGetters(['loading'])
+  }
+}
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -1,28 +1,30 @@
 /*
-* 提示气泡框
-* */
+ * 提示气泡框
+ * */
 
 import Vue from 'vue'
 import ToastTemp from '@/components/toast/toast.vue'
 
 const ToastConstructor = Vue.extend(ToastTemp)
-const removeDom = event => {
+const removeDom = (event) => {
   event.target.parentNode.removeChild(event.target)
 }
-ToastConstructor.prototype.close = function () {
+ToastConstructor.prototype.close = function() {
   this.hide()
   this.$el.addEventListener('transitionend', removeDom)
 }
 
-const Toast = options => {
-  let opt = {
+const Toast = (options) => {
+  const opt = {
     position: 'middle',
     duration: 2500,
     iconClass: 'icon-Shapex' // icon-success
   }
-  let instance = new ToastConstructor()
-  options = typeof options === 'string' ? Object.assign({message: options}, opt)
-    : Object.assign(opt, options)
+  const instance = new ToastConstructor()
+  options =
+    typeof options === 'string'
+      ? Object.assign({ message: options }, opt)
+      : Object.assign(opt, options)
   instance.message = options.message
   instance.position = options.position
   if (options.hasIcon) {
@@ -40,4 +42,3 @@ const Toast = options => {
 }
 
 export default Toast
-
