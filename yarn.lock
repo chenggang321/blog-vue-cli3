@@ -4214,7 +4214,7 @@ highlight.js-async-webpack@^1.0.4:
   resolved "https://registry.npm.taobao.org/highlight.js-async-webpack/download/highlight.js-async-webpack-1.0.4.tgz#c06b67bf99f049045d62b756e5855b0912ec616c"
   integrity sha1-wGtnv5nwSQRdYrdW5YVbCRLsYWw=
 
-highlight.js@^9.11.0, highlight.js@^9.6.0:
+highlight.js@^9.11.0, highlight.js@^9.18.1, highlight.js@^9.6.0:
   version "9.18.1"
   resolved "https://registry.npm.taobao.org/highlight.js/download/highlight.js-9.18.1.tgz#ed21aa001fe6252bb10a3d76d47573c6539fe13c"
   integrity sha1-7SGqAB/mJSuxCj121HVzxlOf4Tw=
@@ -5282,6 +5282,11 @@ map-visit@^1.0.0:
   integrity sha1-7Nyo8TFE5mDxtb1B8S80edmN+48=
   dependencies:
     object-visit "^1.0.0"
+
+marked@^0.8.2:
+  version "0.8.2"
+  resolved "https://registry.npm.taobao.org/marked/download/marked-0.8.2.tgz?cache=0&sync_timestamp=1584893407844&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fmarked%2Fdownload%2Fmarked-0.8.2.tgz#4faad28d26ede351a7a1aaa5fec67915c869e355"
+  integrity sha1-T6rSjSbt41Gnoaql/sZ5Fchp41U=
 
 mavon-editor@^2.8.3:
   version "2.8.3"
