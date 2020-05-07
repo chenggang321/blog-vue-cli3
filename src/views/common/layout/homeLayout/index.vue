@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <BlogHeader />
-    <div class="row m-t-60">
+    <div class="row">
       <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
         <BlogAside />
       </div>

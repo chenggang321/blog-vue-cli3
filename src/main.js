@@ -14,8 +14,7 @@ import 'normalize.css'
 import '@/assets/css/comment.css'
 
 // 引入bootstrap
-import '@/assets/bootstrap/js/bootstrap.min.js'
-import '@/assets/bootstrap/css/bootstrap.css'
+import '@/assets/bootstrap/scss/bootstrap.scss'
 
 // 将工具方法挂载到Vue上
 Vue.use(api)
