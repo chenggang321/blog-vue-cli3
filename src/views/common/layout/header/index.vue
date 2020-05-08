@@ -1,164 +1,117 @@
 <template>
-  <div>
-    <nav class="navbar navbar-default navbar-fixed-top">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button
-            type="button"
-            class="navbar-toggle collapsed"
-            data-toggle="collapse"
-            data-target="#bs-example-navbar-collapse-1"
-            aria-expanded="false"
-          >
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar" />
-            <span class="icon-bar" />
-            <span class="icon-bar" />
-          </button>
-          <a
-            class="navbar-brand"
-            href="/"
-          ><span><img
-            class="logo"
-            src="@/assets/images/favicon.png"
-            style="margin-top: -5px;"
-          >&nbsp;</span></a>
-        </div>
+    <div>
+        <nav
+            class="navbar navbar-expand-lg navbar-light bg-light"
+            style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000;"
+        >
+            <a class="navbar-brand" href="/"
+                ><img
+                    class="logo"
+                    src="@/assets/images/favicon.png"
+                    style="margin-top: -5px;"
+            /></a>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse">
-          <form class="navbar-form navbar-left">
-            <div class="form-group">
-              <div class="input-group">
-                <input
-                  id="keyWord"
-                  type="text"
-                  class="form-control"
-                  placeholder="搜索文章"
-                  name="keyword"
-                >
-                <span class="input-group-btn">
-                <button id="searchBtn" class="btn btn-default" type="button">
-                  <span class="glyphicon glyphicon-search" />
-                </button>
-              </span>
-              </div>
-            </div>
-          </form>
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="https://github.com/chenggang321"><span />github</a>
-            </li>
-            <li>
-              <a
-                v-if="!userInfo"
-                data-toggle="modal"
-                data-target="#loginModal"
-                style="cursor: pointer;"
-              >登录</a>
-              <ul v-else class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                  <a
-                    href="#"
-                    class="dropdown-toggle"
-                    data-toggle="dropdown"
-                    role="button"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >{{ userInfo.username }} <span
-                    class="caret"
-                  /></a>
-                  <ul class="dropdown-menu">
-                    <li v-if="userInfo.type === 0">
-                      <router-link to="/admin">进入后台</router-link>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon" />
+            </button>
+
+            <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                <form class="form-inline my-2 my-lg-0 mr-auto">
+                    <input
+                        class="form-control mr-sm-2"
+                        type="search"
+                        placeholder="搜索文章"
+                        aria-label="Search"
+                    />
+                    <button
+                        class="btn btn-outline-success my-2 my-sm-0"
+                        type="submit"
+                    >
+                        搜索
+                    </button>
+                </form>
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a
+                            class="nav-link"
+                            href="https://github.com/chenggang321"
+                            >github</a
+                        >
                     </li>
-                    <li><a @click="removeUser">退出</a></li>
-                  </ul>
-                </li>
-              </ul>
-              <modal id="loginModal" title="登录/注册">
-                <div slot="modal-body">
-                  <login />
-                </div>
-                <!--<div slot="modal-footer">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                </div>-->
-              </modal>
-            </li>
-          </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-      </div>
-      <!-- /.container-fluid -->
-    </nav>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="position: fixed;top:0;left: 0;right: 0;z-index: 1000">
-      <a class="navbar-brand" href="/"><img
-        class="logo"
-        src="@/assets/images/favicon.png"
-        style="margin-top: -5px;"
-      ></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="https://github.com/chenggang321">github</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
+                    <li class="nav-item dropdown">
+                        <a v-if="!userInfo" class="nav-link" href="#">
+                            登录
+                        </a>
+                        <a v-else class="nav-link dropdown-toggle" href="#">
+                            {{ userInfo.username }}
+                        </a>
+                        <div class="dropdown-menu" style="display: block;">
+                            <router-link
+                                v-if="(userInfo || {}).type === 0"
+                                class="dropdown-item"
+                                to="/admin"
+                                >进入后台</router-link
+                            >
+                            <a
+                                class="dropdown-item"
+                                href="#"
+                                @click="removeUser"
+                                >退出</a
+                            >
+                        </div>
+                        <!--<modal id="loginModal" title="登录/注册">
+              <div slot="modal-body">
+                <login />
+              </div>
+              &lt;!&ndash;<div slot="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+              </div>&ndash;&gt;
+            </modal>-->
+                    </li>
+                </ul>
             </div>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="搜索文章" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
-        </form>
-      </div>
-    </nav>
-  </div>
-
+        </nav>
+    </div>
 </template>
 
 <script>
-import Modal from '@/components/modal/blog-modal'
-import Login from '@/views/login'
-import { mapGetters, mapMutations } from 'vuex'
+import Modal from "@/components/modal/blog-modal";
+import Login from "@/views/login";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
-  name: 'BlogHeader',
-  components: {
-    Modal,
-    Login
-  },
-  computed: {
-    userInfo() {
-      return this.user === undefined ? null : JSON.parse(this.user)
+    name: "BlogHeader",
+    components: {
+        Modal,
+        Login,
     },
-    ...mapGetters({
-      user: 'user'
-    })
-  },
-  methods: {
-    ...mapMutations({
-      removeUser: 'REMOVE_USER'
-    })
-  }
-}
+    computed: {
+        userInfo() {
+            return this.user === undefined ? null : JSON.parse(this.user);
+        },
+        ...mapGetters({
+            user: "user",
+        }),
+    },
+    methods: {
+        ...mapMutations({
+            removeUser: "REMOVE_USER",
+        }),
+    },
+};
 </script>
 
 <style scoped>
 .logo {
-  width: 32px;
-  height: 32px;
+    width: 32px;
+    height: 32px;
 }
 </style>

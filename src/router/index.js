@@ -1,50 +1,50 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './home'
-import Admin from './admin'
+import Vue from "vue";
+import Router from "vue-router";
+import Home from "./home";
+import Admin from "./admin";
 
-Vue.use(Router)
+Vue.use(Router);
 
-const VueRouterPush = Router.prototype.push
+const VueRouterPush = Router.prototype.push;
 Router.prototype.push = function push(to) {
-  return VueRouterPush.call(this, to).catch((err) => err)
-}
+    return VueRouterPush.call(this, to).catch((err) => err);
+};
 
 const routes = [
-  {
-    path: '/',
-    redirect: '/home'
-  },
-  {
-    path: '/register',
-    name: 'register',
-    component: () => import('@/views/register')
-  },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/login')
-  },
-  Home,
-  Admin,
-  {
-    path: '/chat',
-    name: 'chat',
-    component: () => import('@/views/chat'),
-    meta: {
-      auth: true,
-      title: 'chat'
-    }
-  },
-  {
-    path: '/*',
-    redirect: '/home'
-  }
-]
+    {
+        path: "/",
+        redirect: "/home",
+    },
+    {
+        path: "/register",
+        name: "register",
+        component: () => import("@/views/register"),
+    },
+    {
+        path: "/login",
+        name: "login",
+        component: () => import("@/views/login"),
+    },
+    Home,
+    Admin,
+    {
+        path: "/chat",
+        name: "chat",
+        component: () => import("@/views/chat"),
+        meta: {
+            auth: true,
+            title: "chat",
+        },
+    },
+    {
+        path: "/*",
+        redirect: "/home",
+    },
+];
 
 const router = new Router({
-  routes: routes
-})
+    routes: routes,
+});
 
 // 全局路由守卫
 // 路由变化之前
@@ -67,4 +67,4 @@ const router = new Router({
 //   }
 // })
 
-export default router
+export default router;

@@ -23,6 +23,7 @@ module.exports = {
       }
     }],
     "vue/singleline-html-element-content-newline": "off",
+    "vue/no-unused-components": "off",
     "vue/multiline-html-element-content-newline":"off",
     "vue/name-property-casing": ["error", "PascalCase"],
     "vue/no-v-html": "off",
@@ -143,7 +144,7 @@ module.exports = {
     }],
     'no-unreachable': 2,
     'no-unsafe-finally': 2,
-    'no-unused-vars': [2, {
+    'no-unused-vars': [0, {
       'vars': 'all',
       'args': 'none'
     }],
