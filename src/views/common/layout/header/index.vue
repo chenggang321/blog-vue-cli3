@@ -47,13 +47,18 @@
                         >
                     </li>
                     <li class="nav-item dropdown">
-                        <a v-if="!userInfo" class="nav-link" href="#">
+                        <a
+                            v-if="!userInfo"
+                            class="nav-link"
+                            href="#"
+                            @click="isShowLogin = true"
+                        >
                             登录
                         </a>
                         <a v-else class="nav-link dropdown-toggle" href="#">
                             {{ userInfo.username }}
                         </a>
-                        <div class="dropdown-menu" style="display: block;">
+                        <!--<div class="dropdown-menu" style="display: block;">
                             <router-link
                                 v-if="(userInfo || {}).type === 0"
                                 class="dropdown-item"
@@ -66,15 +71,8 @@
                                 @click="removeUser"
                                 >退出</a
                             >
-                        </div>
-                        <!--<modal id="loginModal" title="登录/注册">
-              <div slot="modal-body">
-                <login />
-              </div>
-              &lt;!&ndash;<div slot="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-              </div>&ndash;&gt;
-            </modal>-->
+                        </div>-->
+                        <Login v-model="isShowLogin" />
                     </li>
                 </ul>
             </div>
@@ -92,6 +90,11 @@ export default {
     components: {
         Modal,
         Login,
+    },
+    data() {
+        return {
+            isShowLogin: false,
+        };
     },
     computed: {
         userInfo() {
