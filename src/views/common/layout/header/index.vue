@@ -1,83 +1,82 @@
 <template>
-    <div>
-        <nav
-            class="navbar navbar-expand-lg navbar-light bg-light"
-            style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000;"
-        >
-            <a class="navbar-brand" href="/"
-                ><img
-                    class="logo"
-                    src="@/assets/images/favicon.png"
-                    style="margin-top: -5px;"
-            /></a>
+    <nav
+        class="navbar navbar-expand-lg navbar-light bg-light"
+        style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000;"
+    >
+        <a class="navbar-brand" href="/"
+            ><img
+                class="logo"
+                src="@/assets/images/favicon.png"
+                style="margin-top: -5px;"
+        /></a>
 
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
+        <button class="navbar-toggler" type="button">
+            <span class="navbar-toggler-icon" />
+        </button>
+
+        <div class="collapse navbar-collapse">
+            <!--<form class="form-inline my-2 my-lg-0 mr-auto">
+                <input
+                    class="form-control mr-sm-2"
+                    type="search"
+                    placeholder="搜索文章"
+                    aria-label="Search"
+                />
+                <button
+                    class="btn btn-outline-success my-2 my-sm-0"
+                    type="submit"
+                >
+                    搜索
+                </button>
+            </form>-->
+            <el-input
+                placeholder="搜索文章"
+                v-model="search"
+                class="my-2 mr-auto col-2"
+                size="small"
             >
-                <span class="navbar-toggler-icon" />
-            </button>
-
-            <div id="navbarSupportedContent" class="collapse navbar-collapse">
-                <form class="form-inline my-2 my-lg-0 mr-auto">
-                    <input
-                        class="form-control mr-sm-2"
-                        type="search"
-                        placeholder="搜索文章"
-                        aria-label="Search"
-                    />
-                    <button
-                        class="btn btn-outline-success my-2 my-sm-0"
-                        type="submit"
+                <template slot="append"
+                    ><el-button icon="el-icon-search"></el-button
+                ></template>
+            </el-input>
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="https://github.com/chenggang321"
+                        >github</a
                     >
-                        搜索
-                    </button>
-                </form>
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
-                        <a
-                            class="nav-link"
-                            href="https://github.com/chenggang321"
-                            >github</a
-                        >
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a
-                            v-if="!userInfo"
-                            class="nav-link"
-                            href="#"
-                            @click="isShowLogin = true"
-                        >
-                            登录
-                        </a>
-                        <a v-else class="nav-link dropdown-toggle" href="#">
-                            {{ userInfo.username }}
-                        </a>
-                        <!--<div class="dropdown-menu" style="display: block;">
-                            <router-link
+                </li>
+                <li class="nav-item">
+                    <a
+                        v-if="!userInfo"
+                        class="nav-link"
+                        href="#"
+                        @click="isShowLogin = true"
+                    >
+                        登录
+                    </a>
+                    <Login v-model="isShowLogin" />
+                </li>
+                <li class="nav-item" v-if="userInfo">
+                    <el-dropdown class="m-t-10">
+                        <span class="el-dropdown-link">
+                            {{ userInfo.username
+                            }}<i class="el-icon-arrow-down el-icon--right"></i>
+                        </span>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item
                                 v-if="(userInfo || {}).type === 0"
-                                class="dropdown-item"
-                                to="/admin"
-                                >进入后台</router-link
                             >
-                            <a
-                                class="dropdown-item"
-                                href="#"
-                                @click="removeUser"
-                                >退出</a
+                                <router-link to="/admin">进入后台</router-link>
+                            </el-dropdown-item>
+                            <el-dropdown-item @click="removeUser"
+                                >退出</el-dropdown-item
                             >
-                        </div>-->
-                        <Login v-model="isShowLogin" />
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </template>
 
 <script>
@@ -94,6 +93,7 @@ export default {
     data() {
         return {
             isShowLogin: false,
+            search: "",
         };
     },
     computed: {
