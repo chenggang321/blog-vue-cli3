@@ -15,28 +15,17 @@
         </button>
 
         <div class="collapse navbar-collapse">
-            <!--<form class="form-inline my-2 my-lg-0 mr-auto">
-                <input
-                    class="form-control mr-sm-2"
-                    type="search"
-                    placeholder="搜索文章"
-                    aria-label="Search"
-                />
-                <button
-                    class="btn btn-outline-success my-2 my-sm-0"
-                    type="submit"
-                >
-                    搜索
-                </button>
-            </form>-->
             <el-input
                 placeholder="搜索文章"
-                v-model="search"
+                v-model="key"
                 class="my-2 mr-auto col-2"
                 size="small"
             >
                 <template slot="append"
-                    ><el-button icon="el-icon-search"></el-button
+                    ><el-button
+                        icon="el-icon-search"
+                        @click="search"
+                    ></el-button
                 ></template>
             </el-input>
             <ul class="navbar-nav">
@@ -93,7 +82,7 @@ export default {
     data() {
         return {
             isShowLogin: false,
-            search: "",
+            key: "",
         };
     },
     computed: {
@@ -108,6 +97,9 @@ export default {
         ...mapMutations({
             removeUser: "REMOVE_USER",
         }),
+        search() {
+            console.log(this.key);
+        },
     },
 };
 </script>
